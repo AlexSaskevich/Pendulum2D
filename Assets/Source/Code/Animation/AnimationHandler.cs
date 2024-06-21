@@ -33,6 +33,7 @@ namespace Source.Code.Animation
         private void OnDestroy()
         {
             _cancellationTokenSource?.Cancel();
+            DOTween.Kill(SelfTransform);
         }
 
         public void Init(Transform prefab, Transform targetPoint)

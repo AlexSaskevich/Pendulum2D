@@ -1,14 +1,22 @@
 using System.Collections.Generic;
+using Source.Code.Infrastructure;
 using UnityEngine;
 
 namespace Source.Code.Animation
 {
-    public class AnimationEntryPoint : MonoBehaviour
+    public class AnimationSceneBootstrapper : Bootstrapper
     {
-        [SerializeField] private Transform _animatedTransformPrefab;
+        [SerializeField] private FlyingObjectView _flyingObjectView;
         [SerializeField] private List<AnimationHandler> _animationHandlers;
 
-        private void Start()
+        public override string TargetScene => "MainScene";
+
+        protected override void OnBootstrap()
+        {
+            StartAnimation();
+        }
+
+        private void StartAnimation()
         {
             int count = _animationHandlers.Count;
 
@@ -16,7 +24,7 @@ namespace Source.Code.Animation
             {
                 AnimationHandler animationHandler = _animationHandlers[i];
                 int nextIndex = (i + 1) % count;
-                animationHandler.Init(_animatedTransformPrefab, _animationHandlers[nextIndex].SelfTransform);
+                animationHandler.Init(_flyingObjectView.transform, _animationHandlers[nextIndex].SelfTransform);
                 _ = animationHandler.Play();
             }
         }
