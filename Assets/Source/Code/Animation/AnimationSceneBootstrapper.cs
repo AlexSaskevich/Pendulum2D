@@ -16,6 +16,10 @@ namespace Source.Code.Animation
             StartAnimation();
         }
 
+        protected override void OnDestroyed()
+        {
+        }
+
         private void StartAnimation()
         {
             int count = _animationHandlers.Count;

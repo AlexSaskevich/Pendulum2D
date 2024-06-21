@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Source.Code
+namespace Source.Code.ScenesManagement
 {
     [Serializable]
     public class ProgressBar : IDisposable

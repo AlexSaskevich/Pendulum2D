@@ -24,6 +24,7 @@ namespace Source.Code.Infrastructure
         private void OnDestroy()
         {
             _button.onClick.RemoveListener(OnButtonClicked);
+            OnDestroyed();
         }
 
         private async void OnButtonClicked()
@@ -46,10 +47,9 @@ namespace Source.Code.Infrastructure
         {
             _sceneLoader = new SceneLoader();
             _button.onClick.AddListener(OnButtonClicked);
-
-            OnBootstrap();
         }
 
         protected abstract void OnBootstrap();
+        protected abstract void OnDestroyed();
     }
 }
