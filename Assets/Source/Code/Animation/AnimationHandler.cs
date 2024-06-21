@@ -12,21 +12,22 @@ namespace Source.Code.Animation
     {
         [SerializeField] private ObjectFlyingAnimation _objectFlyingAnimation;
         [SerializeField] private ShakeAnimation _shakeAnimation;
-        [SerializeField] private Transform _animatedTransformPrefab;
-        [SerializeField] private Transform _targetPoint;
 
         [field: SerializeField] public float Delay { get; private set; } = 1;
         [field: SerializeField] public int LoopCount { get; private set; }
         [field: SerializeField] public int AnimatedObjectsCountInLoop { get; private set; }
 
-        private Transform _transform;
+        public Transform SelfTransform { get; private set; }
+
         private CancellationTokenSource _cancellationTokenSource;
         private Vector3 _defaultScale;
+        private Transform _targetPoint;
+        private Transform _animatedTransformPrefab;
 
-        private void Start()
+        private void Awake()
         {
-            _transform = transform;
-            _defaultScale = _transform.localScale;
+            SelfTransform = transform;
+            _defaultScale = SelfTransform.localScale;
         }
 
         private void OnDestroy()
@@ -34,8 +35,26 @@ namespace Source.Code.Animation
             _cancellationTokenSource?.Cancel();
         }
 
+        public void Init(Transform prefab, Transform targetPoint)
+        {
+            if (prefab == null)
+            {
+                Debug.LogError($"throw new ArgumentNullException({nameof(prefab)}");
+                return;
+            }
+
+            if (targetPoint == null)
+            {
+                Debug.LogError($"throw new ArgumentNullException({nameof(targetPoint)}");
+                return;
+            }
+
+            _animatedTransformPrefab = prefab;
+            _targetPoint = targetPoint;
+        }
+
         [Button]
-        private async Task Play()
+        public async Task Play()
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
@@ -50,7 +69,7 @@ namespace Source.Code.Animation
                     }
 
                     Transform animatedTransform =
-                        LeanPool.Spawn(_animatedTransformPrefab, _transform.position, Quaternion.identity);
+                        LeanPool.Spawn(_animatedTransformPrefab, SelfTransform.position, Quaternion.identity);
                     _objectFlyingAnimation.PlayJumpAnimation(animatedTransform, _targetPoint.position,
                         () => OnAnimationFinished(animatedTransform));
                     await Task.Delay(TimeSpan.FromSeconds(Delay), _cancellationTokenSource.Token);
@@ -64,7 +83,7 @@ namespace Source.Code.Animation
 
         private void OnAnimationFinished(Transform animatedTransform)
         {
-            _shakeAnimation.Play(_transform, _defaultScale);
+            _shakeAnimation.Play(SelfTransform, _defaultScale);
             DOTween.Kill(animatedTransform);
             LeanPool.Despawn(animatedTransform);
         }
