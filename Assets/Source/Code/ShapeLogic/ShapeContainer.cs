@@ -13,7 +13,8 @@ namespace Source.Code.ShapeLogic
 
         [field: SerializeField] public int ShapeCount { get; private set; }
 
-        private Queue<ShapePresenter> _shapePresenters = new();
+        private List<ShapePresenter> _shapePresenters = new();
+        private IEnumerator<ShapePresenter> _enumerator;
 
         public void Init(Transform shapesParent)
         {
@@ -25,10 +26,11 @@ namespace Source.Code.ShapeLogic
                 ShapePresenter shapePresenter = new(shape, spawnedView);
                 spawnedView.Init(shapePresenter);
                 shapePresenter.Hide();
-                _shapePresenters.Enqueue(shapePresenter);
+                _shapePresenters.Add(shapePresenter);
             }
 
-            ShuffleQueue(_shapePresenters);
+            Shuffle(_shapePresenters);
+            _enumerator = _shapePresenters.GetEnumerator();
         }
 
         public void Dispose()
@@ -41,27 +43,12 @@ namespace Source.Code.ShapeLogic
 
         public ShapePresenter GetShape()
         {
-            if (_shapePresenters.TryDequeue(out ShapePresenter shapePresenter))
+            if (_enumerator.MoveNext() == false)
             {
-                return shapePresenter;
+                return null;
             }
 
-            Debug.LogError("The figures are over!");
-            return null;
-        }
-
-        private static void ShuffleQueue<T>(Queue<T> queue)
-        {
-            List<T> tempList = new(queue);
-
-            Shuffle(tempList);
-
-            queue.Clear();
-
-            foreach (T item in tempList)
-            {
-                queue.Enqueue(item);
-            }
+            return _enumerator.Current;
         }
 
         private static void Shuffle<T>(IList<T> list)

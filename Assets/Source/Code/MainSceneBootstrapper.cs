@@ -4,6 +4,7 @@ using Source.Code.PendulumLogic;
 using Source.Code.ScoreLogic;
 using Source.Code.ShapeLogic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Source.Code
 {
@@ -42,6 +43,7 @@ namespace Source.Code
         protected override void OnSwitchSceneButtonClicked()
         {
             _gameOverScreenPresenter.Hide();
+            _scoreView.Hide();
         }
 
         private void InitPendulum()
@@ -60,8 +62,14 @@ namespace Source.Code
         private void InitGameOverScreen()
         {
             _gameOverScreenView.Init();
-            _gameOverScreenPresenter = new GameOverScreenPresenter(_gameOverScreenView, _matchHandler, _tapDetector);
+            _gameOverScreenPresenter = new GameOverScreenPresenter(_gameOverScreenView, _matchHandler, _tapDetector,
+                OnRestartButtonClicked);
             _gameOverScreenPresenter.Hide();
+        }
+
+        private async void OnRestartButtonClicked()
+        {
+            await LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

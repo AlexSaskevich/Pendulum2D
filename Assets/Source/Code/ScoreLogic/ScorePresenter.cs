@@ -27,5 +27,10 @@ namespace Source.Code.ScoreLogic
             _score.Increase(score);
             _scoreView.Set(_score.CurrentValue);
         }
+
+        public void Hide()
+        {
+            _scoreView.Hide();
+        }
     }
 }

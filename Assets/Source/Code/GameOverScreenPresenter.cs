@@ -8,9 +8,12 @@ namespace Source.Code
         private readonly GameOverScreenView _view;
         private readonly MatchHandler _matchHandler;
         private readonly TapDetector _tapDetector;
+        private readonly Action _restartButtonClicked;
 
-        public GameOverScreenPresenter(GameOverScreenView view, MatchHandler matchHandler, TapDetector tapDetector)
+        public GameOverScreenPresenter(GameOverScreenView view, MatchHandler matchHandler, TapDetector tapDetector,
+            Action restartButtonClicked)
         {
+            _restartButtonClicked = restartButtonClicked;
             _tapDetector = tapDetector;
             _view = view;
             _matchHandler = matchHandler;
@@ -38,6 +41,7 @@ namespace Source.Code
 
         private void OnRestartButtonClicked()
         {
+            _restartButtonClicked?.Invoke();
         }
     }
 }

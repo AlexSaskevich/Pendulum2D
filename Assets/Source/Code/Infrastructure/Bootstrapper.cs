@@ -29,11 +29,18 @@ namespace Source.Code.Infrastructure
 
         private async void OnButtonClicked()
         {
+            await LoadScene();
+        }
+
+        protected async Task LoadScene(string sceneName = null)
+        {
             _loadingScreen.Show();
             OnSwitchSceneButtonClicked();
 
+            string targetScene = sceneName ?? TargetScene;
+
             Task<AsyncOperation> loadSceneOperation =
-                _sceneLoader.LoadSceneAsync(TargetScene, LoadSceneMode.Single, false);
+                _sceneLoader.LoadSceneAsync(targetScene, LoadSceneMode.Single, false);
             Task progressBarTask = _loadingScreen.ProgressBar.SetValue(1);
 
             await Task.WhenAll(progressBarTask, loadSceneOperation);

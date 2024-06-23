@@ -48,6 +48,8 @@ namespace Source.Code.ShapeLogic
         {
             _shape.Hang();
             _shapeView.transform.SetParent(parent);
+            _shapeView.transform.localPosition = Vector2.zero;
+            _shapeView.Rigidbody.simulated = false;
         }
 
         public void Show()
@@ -72,17 +74,6 @@ namespace Source.Code.ShapeLogic
         public void SetName(string name)
         {
             _shapeView.name = name;
-        }
-
-        public void UpdateName(string name)
-        {
-            string shapeViewName = _shapeView.name;
-            _shapeView.name = shapeViewName + " after = " + name + $"({InstanceID})";
-        }
-
-        public void DisableRigidbody()
-        {
-            _shapeView.Rigidbody.simulated = false;
         }
 
         private void OnStopped()

@@ -11,5 +11,10 @@ namespace Source.Code.ScoreLogic
         {
             _scoreText.text = score.ToString();
         }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
