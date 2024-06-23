@@ -27,6 +27,7 @@ namespace Source.Code
         {
             _matchHandler.Init();
             _shapeContainer.Init(_pendulumView.ShapeParent);
+            _shapeContainer.Cleared += OnShapeContainerCleared;
             InitPendulum();
             InitScore();
             InitGameOverScreen();
@@ -35,6 +36,7 @@ namespace Source.Code
         protected override void OnDestroyed()
         {
             _pendulumPresenter?.Dispose();
+            _shapeContainer.Cleared -= OnShapeContainerCleared;
             _shapeContainer?.Dispose();
             _scorePresenter?.Dispose();
             _gameOverScreenPresenter?.Dispose();
@@ -70,6 +72,11 @@ namespace Source.Code
         private async void OnRestartButtonClicked()
         {
             await LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        private void OnShapeContainerCleared()
+        {
+            _gameOverScreenPresenter.Show();
         }
     }
 }

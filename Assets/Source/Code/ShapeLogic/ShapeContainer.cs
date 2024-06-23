@@ -16,6 +16,8 @@ namespace Source.Code.ShapeLogic
         private List<ShapePresenter> _shapePresenters = new();
         private IEnumerator<ShapePresenter> _enumerator;
 
+        public event Action Cleared;
+
         public void Init(Transform shapesParent)
         {
             for (int i = 0; i < ShapeCount; i++)
@@ -45,6 +47,7 @@ namespace Source.Code.ShapeLogic
         {
             if (_enumerator.MoveNext() == false)
             {
+                Cleared?.Invoke();
                 return null;
             }
 

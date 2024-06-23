@@ -17,13 +17,13 @@ namespace Source.Code
             _tapDetector = tapDetector;
             _view = view;
             _matchHandler = matchHandler;
-            _matchHandler.ArrayFilled += OnArrayFilled;
+            _matchHandler.ArrayFilled += Show;
             _view.OnRestartButtonClicked += OnRestartButtonClicked;
         }
 
         public void Dispose()
         {
-            _matchHandler.ArrayFilled -= OnArrayFilled;
+            _matchHandler.ArrayFilled -= Show;
             _view.OnRestartButtonClicked -= OnRestartButtonClicked;
         }
 
@@ -32,8 +32,7 @@ namespace Source.Code
             _view.Hide();
         }
 
-
-        private void OnArrayFilled()
+        public void Show()
         {
             _tapDetector.enabled = false;
             _view.Show();
