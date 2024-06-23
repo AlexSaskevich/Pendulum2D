@@ -53,7 +53,7 @@ namespace Source.Code.MatchLogic
             FindHorizontalMatchesInArray(shapeType, finalRowIndex);
             FindMainDiagonalMatchInArray(shapeType, finalRowIndex, columnIndex);
             FindSecondaryDiagonalMatchInArray(shapeType, finalRowIndex, columnIndex);
-            shapePresenter.Stopped += OnShapeStopped; //todo можно заменить на асинк по делею
+            shapePresenter.Stopped += OnShapeStopped; //todo async delay or coroutine
         }
 
         private int AddShape(ShapePresenter shapePresenter, int columnIndex)
@@ -63,8 +63,6 @@ namespace Source.Code.MatchLogic
                 if (_shapes[i, columnIndex] == null)
                 {
                     _shapes[i, columnIndex] = shapePresenter;
-                    _shapes[i, columnIndex]
-                        .SetName($"{i}-{columnIndex}({_shapes[i, columnIndex].InstanceID})");
                     return i;
                 }
             }

@@ -25,8 +25,6 @@ namespace Source.Code.ShapeLogic
         public event Action<ShapePresenter> Stopped;
 
         public ShapeType ShapeType => _shape.Type;
-        public string Name => _shapeView.name;
-        public int InstanceID => _shapeView.GetInstanceID();
         public float Cost => _shape.Cost;
 
         public void Drop()
@@ -36,20 +34,11 @@ namespace Source.Code.ShapeLogic
             _shapeView.Rigidbody.simulated = true;
         }
 
-        public void Drop(Vector2 position)
-        {
-            _shape.Drop();
-            _shapeView.transform.parent = null;
-            _shapeView.transform.position = position;
-            _shapeView.Rigidbody.simulated = true;
-        }
-
         public void Hang(Transform parent)
         {
             _shape.Hang();
             _shapeView.transform.SetParent(parent);
             _shapeView.transform.localPosition = Vector2.zero;
-            _shapeView.Rigidbody.simulated = false;
         }
 
         public void Show()
@@ -69,11 +58,6 @@ namespace Source.Code.ShapeLogic
                 Debug.LogError("Spawn VFX");
                 LeanPool.Despawn(_shapeView);
             });
-        }
-
-        public void SetName(string name)
-        {
-            _shapeView.name = name;
         }
 
         private void OnStopped()
