@@ -17,6 +17,10 @@ PrefabInstance:
       value: 0.94509804
       objectReference: {fileID: 0}
     - target: {fileID: 3821517576150970799, guid: 0e4a12fc29efb42cebf6f21db0ad07af, type: 3}
+      propertyPath: <Config>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 211283577e9f14fbb9d0d3d821e15411, type: 2}
+    - target: {fileID: 3821517576150970799, guid: 0e4a12fc29efb42cebf6f21db0ad07af, type: 3}
       propertyPath: <ShapeType>k__BackingField
       value: 3
       objectReference: {fileID: 0}

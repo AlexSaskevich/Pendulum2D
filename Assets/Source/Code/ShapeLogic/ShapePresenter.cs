@@ -24,7 +24,7 @@ namespace Source.Code.ShapeLogic
 
         public event Action<ShapePresenter> Stopped;
 
-        public ShapeType ShapeType => _shapeView.ShapeType;
+        public ShapeType ShapeType => _shape.Type;
         public string Name => _shapeView.name;
         public int InstanceID => _shapeView.GetInstanceID();
 

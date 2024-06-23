@@ -21,7 +21,7 @@ namespace Source.Code.ShapeLogic
             {
                 ShapeView shapeView = _shapeViews[Random.Range(0, _shapeViews.Count)];
                 ShapeView spawnedView = LeanPool.Spawn(shapeView, shapesParent);
-                Shape shape = new();
+                Shape shape = new(shapeView.Config.ShapeType);
                 ShapePresenter shapePresenter = new(shape, spawnedView);
                 spawnedView.Init(shapePresenter);
                 shapePresenter.Hide();
