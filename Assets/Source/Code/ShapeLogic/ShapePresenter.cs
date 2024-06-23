@@ -27,6 +27,7 @@ namespace Source.Code.ShapeLogic
         public ShapeType ShapeType => _shape.Type;
         public string Name => _shapeView.name;
         public int InstanceID => _shapeView.GetInstanceID();
+        public float Cost => _shape.Cost;
 
         public void Drop()
         {

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Source.Code.ShapeLogic;
 using UnityEngine;
@@ -15,7 +17,9 @@ namespace Source.Code.MatchLogic
 
         private ShapePresenter[,] _shapes = new ShapePresenter[Size, Size];
 
-        private void Start()
+        public event Action<float> MatchesCleared;
+
+        public void Init()
         {
             for (int i = 0; i < _columns.Length; i++)
             {
@@ -107,7 +111,13 @@ namespace Source.Code.MatchLogic
         {
             Debug.LogWarning("OnShapeStopped!");
             shapePresenter.Stopped -= OnShapeStopped;
+
+            float totalScore = _matches.Sum(x => x.Cost);
+            Debug.LogError($"Total score! = {totalScore}");
+
             ClearMatches();
+            MatchesCleared?.Invoke(totalScore);
+            ShiftArrayDown();
         }
 
         [Button]
@@ -132,9 +142,6 @@ namespace Source.Code.MatchLogic
             }
 
             _matches.Clear();
-
-            // ShiftMatrixDown();
-            ShiftArrayDown();
         }
 
         [Button]
