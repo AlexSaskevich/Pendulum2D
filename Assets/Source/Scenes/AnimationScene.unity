@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd01d9641e443c0babfe8a29849f9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 844381703}
+  _switchSceneButton: {fileID: 844381703}
   _loadingScreen: {fileID: 1482524330}
   _flyingObjectView: {fileID: 8906589066554128236, guid: 473a92514c36d43b4821e48e465e4cb0, type: 3}
   _animationHandlers:

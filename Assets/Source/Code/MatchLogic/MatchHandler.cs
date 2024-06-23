@@ -18,6 +18,7 @@ namespace Source.Code.MatchLogic
         private ShapePresenter[,] _shapes = new ShapePresenter[Size, Size];
 
         public event Action<float> MatchesCleared;
+        public event Action ArrayFilled;
 
         public void Init()
         {
@@ -107,6 +108,22 @@ namespace Source.Code.MatchLogic
             return -1;
         }
 
+        public static bool IsArrayFilled<T>(T[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (EqualityComparer<T>.Default.Equals(array[i, j], default))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         private void OnShapeStopped(ShapePresenter shapePresenter)
         {
             Debug.LogWarning("OnShapeStopped!");
@@ -118,6 +135,12 @@ namespace Source.Code.MatchLogic
             ClearMatches();
             MatchesCleared?.Invoke(totalScore);
             ShiftArrayDown();
+
+            if (IsArrayFilled(_shapes))
+            {
+                ArrayFilled?.Invoke();
+                Debug.LogError("Game over!");
+            }
         }
 
         [Button]

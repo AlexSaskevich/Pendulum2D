@@ -14,9 +14,11 @@ namespace Source.Code
         [SerializeField] private PendulumView _pendulumView;
         [SerializeField] private MatchHandler _matchHandler;
         [SerializeField] private ShapeContainer _shapeContainer;
+        [SerializeField] private GameOverScreenView _gameOverScreenView;
 
         private PendulumPresenter _pendulumPresenter;
         private ScorePresenter _scorePresenter;
+        private GameOverScreenPresenter _gameOverScreenPresenter;
 
         public override string TargetScene => "AnimationScene";
 
@@ -26,6 +28,7 @@ namespace Source.Code
             _shapeContainer.Init(_pendulumView.ShapeParent);
             InitPendulum();
             InitScore();
+            InitGameOverScreen();
         }
 
         protected override void OnDestroyed()
@@ -33,6 +36,12 @@ namespace Source.Code
             _pendulumPresenter?.Dispose();
             _shapeContainer?.Dispose();
             _scorePresenter?.Dispose();
+            _gameOverScreenPresenter?.Dispose();
+        }
+
+        protected override void OnSwitchSceneButtonClicked()
+        {
+            _gameOverScreenPresenter.Hide();
         }
 
         private void InitPendulum()
@@ -46,6 +55,13 @@ namespace Source.Code
             Score score = new();
             _scoreView.Set(0);
             _scorePresenter = new ScorePresenter(score, _scoreView, _matchHandler);
+        }
+
+        private void InitGameOverScreen()
+        {
+            _gameOverScreenView.Init();
+            _gameOverScreenPresenter = new GameOverScreenPresenter(_gameOverScreenView, _matchHandler, _tapDetector);
+            _gameOverScreenPresenter.Hide();
         }
     }
 }

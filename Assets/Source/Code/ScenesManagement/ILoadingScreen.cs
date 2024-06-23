@@ -1,10 +1,9 @@
+using Source.Code.Infrastructure;
+
 namespace Source.Code.ScenesManagement
 {
-    public interface ILoadingScreen
+    public interface ILoadingScreen : IScreen
     {
         public ProgressBar ProgressBar { get; }
-
-        public void Show();
-        public void Hide();
     }
 }

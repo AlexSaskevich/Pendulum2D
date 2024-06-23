@@ -8,7 +8,7 @@ namespace Source.Code.Infrastructure
 {
     public abstract class Bootstrapper : MonoBehaviour
     {
-        [SerializeField] private Button _button;
+        [SerializeField] private Button _switchSceneButton;
         [SerializeField] private LoadingScreen _loadingScreen;
 
         private ISceneLoader _sceneLoader;
@@ -23,13 +23,14 @@ namespace Source.Code.Infrastructure
 
         private void OnDestroy()
         {
-            _button.onClick.RemoveListener(OnButtonClicked);
+            _switchSceneButton.onClick.RemoveListener(OnButtonClicked);
             OnDestroyed();
         }
 
         private async void OnButtonClicked()
         {
             _loadingScreen.Show();
+            OnSwitchSceneButtonClicked();
 
             Task<AsyncOperation> loadSceneOperation =
                 _sceneLoader.LoadSceneAsync(TargetScene, LoadSceneMode.Single, false);
@@ -46,10 +47,11 @@ namespace Source.Code.Infrastructure
         private void Bootstrap()
         {
             _sceneLoader = new SceneLoader();
-            _button.onClick.AddListener(OnButtonClicked);
+            _switchSceneButton.onClick.AddListener(OnButtonClicked);
         }
 
         protected abstract void OnBootstrap();
         protected abstract void OnDestroyed();
+        protected abstract void OnSwitchSceneButtonClicked();
     }
 }

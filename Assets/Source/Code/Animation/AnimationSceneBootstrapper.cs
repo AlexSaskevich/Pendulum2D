@@ -20,6 +20,10 @@ namespace Source.Code.Animation
         {
         }
 
+        protected override void OnSwitchSceneButtonClicked()
+        {
+        }
+
         private void StartAnimation()
         {
             int count = _animationHandlers.Count;
