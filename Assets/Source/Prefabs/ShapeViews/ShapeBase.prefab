@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4464028003135436735}
   - component: {fileID: 8979508509638389121}
+  - component: {fileID: 94913922479612264}
   - component: {fileID: 3821517576150970799}
   m_Layer: 0
   m_Name: ShapeBase
@@ -93,6 +94,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &94913922479612264
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192115716754708510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &3821517576150970799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +142,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 8979508509638389121}
+  <ShapeType>k__BackingField: 0
+  <ShakeAnimation>k__BackingField:
+    _animationParameters:
+      <HitDuration>k__BackingField: 0.25
+      <Strength>k__BackingField: {x: 0.1, y: 0.1, z: 0.1}
+      <Vibrato>k__BackingField: 0
+      <Randomness>k__BackingField: 0
+      <IsFadeOut>k__BackingField: 1
+      <RandomnessMode>k__BackingField: 0
+  <Visual>k__BackingField: {fileID: 2268459424674103435}
 --- !u!1 &6314482247504484134
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +162,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2637957397538359396}
   - component: {fileID: 1727180356267504220}
-  - component: {fileID: 4403919979482546729}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -191,38 +236,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4403919979482546729
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6314482247504484134}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5

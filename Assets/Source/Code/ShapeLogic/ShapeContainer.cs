@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 namespace Source.Code.ShapeLogic
 {
     [Serializable]
-    public class ShapeContainer
+    public class ShapeContainer : IDisposable
     {
         [SerializeField] private List<ShapeView> _shapeViews;
 
@@ -23,11 +23,20 @@ namespace Source.Code.ShapeLogic
                 ShapeView spawnedView = LeanPool.Spawn(shapeView, shapesParent);
                 Shape shape = new();
                 ShapePresenter shapePresenter = new(shape, spawnedView);
+                spawnedView.Init(shapePresenter);
                 shapePresenter.Hide();
                 _shapePresenters.Enqueue(shapePresenter);
             }
 
             ShuffleQueue(_shapePresenters);
+        }
+
+        public void Dispose()
+        {
+            foreach (ShapePresenter shapePresenter in _shapePresenters)
+            {
+                shapePresenter.Dispose();
+            }
         }
 
         public ShapePresenter GetShape()

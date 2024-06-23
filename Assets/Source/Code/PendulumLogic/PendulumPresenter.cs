@@ -1,5 +1,6 @@
 using System;
 using Source.Code.ShapeLogic;
+using UnityEngine;
 
 namespace Source.Code.PendulumLogic
 {
@@ -28,15 +29,15 @@ namespace Source.Code.PendulumLogic
             _tapDetector.Detected -= OnTapDetected;
         }
 
-        private void Drop()
+        private void Drop(Vector2 position)
         {
-            _currentShape.Drop();
+            _currentShape.Drop(position);
             SetShape();
         }
 
-        private void OnTapDetected()
+        private void OnTapDetected(Vector2 position)
         {
-            Drop();
+            Drop(position);
         }
 
         private void SetShape()

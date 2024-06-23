@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Source.Code.Animation
@@ -20,13 +21,16 @@ namespace Source.Code.Animation
     {
         [SerializeField] private ShakeAnimationParameters _animationParameters;
 
-        public void Play(Transform animatedTransform, Vector3 defaultScale)
+        [Button]
+        public void Play(Transform animatedTransform, Vector3 defaultScale, Action finished = null)
         {
             DOTween.Kill(animatedTransform);
             animatedTransform.localScale = defaultScale;
             animatedTransform.DOShakeScale(_animationParameters.HitDuration, _animationParameters.Strength,
-                _animationParameters.Vibrato,
-                _animationParameters.Randomness, _animationParameters.IsFadeOut, _animationParameters.RandomnessMode);
+                    _animationParameters.Vibrato,
+                    _animationParameters.Randomness, _animationParameters.IsFadeOut,
+                    _animationParameters.RandomnessMode)
+                .OnComplete(() => finished?.Invoke());
         }
     }
 }

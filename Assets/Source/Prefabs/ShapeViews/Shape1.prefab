@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Color.g
       value: 0.64705884
       objectReference: {fileID: 0}
+    - target: {fileID: 3821517576150970799, guid: 0e4a12fc29efb42cebf6f21db0ad07af, type: 3}
+      propertyPath: <ShapeType>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4464028003135436735, guid: 0e4a12fc29efb42cebf6f21db0ad07af, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6192115716754708510, guid: 0e4a12fc29efb42cebf6f21db0ad07af, type: 3}
       propertyPath: m_Name
-      value: ShapeBase Variant
+      value: Shape1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
